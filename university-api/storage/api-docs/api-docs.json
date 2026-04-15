@@ -1,0 +1,159 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "University Enrollment API",
+        "description": "University Management System (Laravel + Passport + Swagger + Role Middleware)",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000",
+            "description": "Local Development Server"
+        }
+    ],
+    "paths": {
+        "/api/students": {
+            "get": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Get all students",
+                "description": "GET ALL STUDENTS",
+                "operationId": "9f38d78e23663d865906d1918f55573b",
+                "responses": {
+                    "200": {
+                        "description": "List of students",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Ali"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "ali@gmail.com"
+                                            },
+                                            "role": {
+                                                "type": "string",
+                                                "example": "student"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "example": "2026-01-01T10:00:00.000000Z"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Create new student",
+                "description": "CREATE STUDENT",
+                "operationId": "90fecdc9e9ba90ffdb38f654a2bbd711",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Ali"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "ali@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "123456"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "example": "student"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Student created successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/students/{id}": {
+            "get": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Get student by ID",
+                "description": "GET SINGLE STUDENT",
+                "operationId": "9e2f1ea9240129a6c583dcc0080808cb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Student found"
+                    },
+                    "404": {
+                        "description": "Student not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "Passport Access Token",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Students",
+            "description": "Student Management APIs"
+        }
+    ]
+}
